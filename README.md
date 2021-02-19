@@ -2,38 +2,54 @@
 
 ## usersテーブル（ユーザー管理機能）
 
-Column    | Type    | Options  |
---------- | ------- | -------- |
-nick_name | string  | not null |
-email     | string  | not null |
-password  | string  | not null |
-name      | string  | not null |
-birthday  | integer | not null |
+Column              | Type    | Options      |
+------------------- | ------- | ------------ |
+email               | string  | unique: true |
+nick_name           | string  | not null     |
+encrypted_password  | string  | not null     |
+first_name          | string  | not null     |
+last_name           | string  | not null     |
+first_name_japanese | string  | not null     |
+last_name_japanese  | string  | not null     |
+date                | integer | not null     |
+
+### Association
+- has_many :item
+- has_many :purchase
 
 
-## exhibitsテーブル（商品出品機能）
+## itemsテーブル（商品出品機能）
 
-Column        | Type    | Options           |
-------------- | ------- | ----------------- |
-text          | text    | not null          |
-title         | string  | not null          |
-category      | string  | not null          |
-condition     | string  | not null          |
-region        | string  | not null          |
-user          | string  | foreign_key: true |
-date_shipment | integer | not null          |
-price         | integer | not null          |
-delivery_fee  | integer | not null          |
+Column        | Type       | Options           |
+------------- | ---------- | ----------------- |
+text          | text       | not null          |
+title         | string     | not null          |
+category      | string     | not null          |
+condition     | string     | not null          |
+region        | string     | not null          |
+user_id       | references | foreign_key: true |
+date_shipment | integer    | not null          |
+price_id      | integer    | not null          |
+delivery_fee  | integer    | not null          |
+
+### Association
+- belongs_to :user
+- has_one :purchase
 
 
-## purchasesテーブル（商品購入機能）
+## addressテーブル（商品購入機能）
 
 Column      | Type    | Options  |
 ----------- | ------- | -------- |
 title       | string  | not null |
-credit_card | string  | not null |
 address     | string  | not null |
 price       | integer | not null |
+user_id     | integer | not null |
+item_id     | integer | not null |
+
+### Association
+- belongs_to :user
+- belongs_to :item
 
 
 ## commentsテーブル（コメント機能）
@@ -42,4 +58,4 @@ Column  | Type   | Options           |
 ------- | ------ | ----------------- |
 text    | text   | not null          |
 user    | string | foreign_key: true |
-exhibit | string | foreign_key: true |
+item    | string | foreign_key: true |
