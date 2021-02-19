@@ -1,24 +1,45 @@
-# README
+# テーブル設計
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## usersテーブル（ユーザー管理機能）
 
-Things you may want to cover:
+Column    | Type    | Options  |
+--------- | ------- | -------- |
+nick_name | string  | not null |
+email     | string  | not null |
+password  | string  | not null |
+name      | string  | not null |
+birthday  | integer | not null |
 
-* Ruby version
 
-* System dependencies
+## exhibitsテーブル（商品出品機能）
 
-* Configuration
+Column        | Type    | Options           |
+------------- | ------- | ----------------- |
+text          | text    | not null          |
+title         | string  | not null          |
+category      | string  | not null          |
+condition     | string  | not null          |
+region        | string  | not null          |
+user          | string  | foreign_key: true |
+date_shipment | integer | not null          |
+price         | integer | not null          |
+delivery_fee  | integer | not null          |
 
-* Database creation
 
-* Database initialization
+## purchasesテーブル（商品購入機能）
 
-* How to run the test suite
+Column      | Type    | Options  |
+----------- | ------- | -------- |
+title       | string  | not null |
+credit_card | string  | not null |
+address     | string  | not null |
+price       | integer | not null |
 
-* Services (job queues, cache servers, search engines, etc.)
 
-* Deployment instructions
+## commentsテーブル（コメント機能）
 
-* ...
+Column  | Type   | Options           |
+------- | ------ | ----------------- |
+text    | text   | not null          |
+user    | string | foreign_key: true |
+exhibit | string | foreign_key: true |
