@@ -35,17 +35,14 @@ user             | references | foreign_key: true |
 ### Association
 - belongs_to :user
 - has_one :purchase
-- has_one :delivery
 
 
 ## purchasesテーブル（商品購入情報）
 
-Column      | Type    | Options  |
------------ | ------- | -------- |
-title       | string  | not null |
-price       | integer | not null |
-user_id     | integer | not null |
-item_id     | integer | not null |
+Column   | Type       | Options           |
+-------- | ---------- | ----------------- |
+user     | references | foreign_key: true |
+item     | references | foreign_key: true |
 
 ### Association
 - belongs_to :user
@@ -55,14 +52,15 @@ item_id     | integer | not null |
 
 ## deliveriesテーブル（配送先情報）
 
-Column         | Type    | Options  |
--------------- | ------- | -------- |
-postal_code    | integer | not null |
-prefectures_id | integer | not null |
-municipality   | string  | not null |
-address        | string  | not null |
-building_name  | string  | not null |
-phone_number   | string  | not null |
+Column         | Type       | Options             |
+-------------- | ---------- | ------------------- |
+postal_code    | integer    | not null            |
+region_id      | integer    | not null            |
+municipality   | string     | not null            |
+address        | string     | not null            |
+building_name  | string     | not null            |
+phone_number   | string     | not null            |
+purchase       | references | foreign_key: true   |
 
 ### Association
 - belongs_to :item
@@ -74,5 +72,5 @@ phone_number   | string  | not null |
 Column  | Type   | Options           |
 ------- | ------ | ----------------- |
 text    | text   | not null          |
-user    | string | foreign_key: true |
-item    | string | foreign_key: true |
+user    | references | foreign_key: true |
+item    | references | foreign_key: true |
