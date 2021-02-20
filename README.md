@@ -1,6 +1,6 @@
 # テーブル設計
 
-## usersテーブル（ユーザー管理情報）
+## usersテーブル（ユーザー情報）
 
 Column              | Type    | Options                |
 ------------------- | ------- | ---------------------- |
@@ -18,7 +18,7 @@ birthday            | date    | not null               |
 - has_many :purchases
 
 
-## itemsテーブル（商品出品情報）
+## itemsテーブル（出品情報）
 
 Column           | Type       | Options           |
 ---------------- | ---------- | ----------------- |
@@ -37,7 +37,7 @@ user             | references | foreign_key: true |
 - has_one :purchase
 
 
-## purchasesテーブル（商品購入情報）
+## purchasesテーブル（購入情報）
 
 Column   | Type       | Options           |
 -------- | ---------- | ----------------- |
@@ -54,23 +54,22 @@ item     | references | foreign_key: true |
 
 Column         | Type       | Options             |
 -------------- | ---------- | ------------------- |
-postal_code    | integer    | not null            |
+postal_code    | string     | not null            |
 region_id      | integer    | not null            |
 municipality   | string     | not null            |
 address        | string     | not null            |
-building_name  | string     | not null            |
+building_name  | string     |                     |
 phone_number   | string     | not null            |
 purchase       | references | foreign_key: true   |
 
 ### Association
-- belongs_to :item
 - belongs_to :purchase
 
 
 ## commentsテーブル（コメント機能）
 
-Column  | Type   | Options           |
-------- | ------ | ----------------- |
-text    | text   | not null          |
+Column  | Type       | Options           |
+------- | ---------- | ----------------- |
+text    | text       | not null          |
 user    | references | foreign_key: true |
 item    | references | foreign_key: true |
